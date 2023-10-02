@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Room from "../models/room";
 
-
+// get all rooms  => /api/rooms
 export const allRooms = async (req: NextRequest) => {
     const resPerPage: number = 8;
 
@@ -14,7 +14,7 @@ export const allRooms = async (req: NextRequest) => {
     });
 }
 
-
+// create new  room  => /api/rooms
 export const newRoom = async (req: NextRequest) => {
     const body = await req.json();
 
@@ -26,7 +26,7 @@ export const newRoom = async (req: NextRequest) => {
     });
 }
 
-
+// get room details => /api/rooms/:id
 export const getRoomDetails = async (req: NextRequest, { params }: { params: { id: string } }) => {
     const room = await Room.findById(params.id);
 
@@ -41,6 +41,34 @@ export const getRoomDetails = async (req: NextRequest, { params }: { params: { i
         //     message: "Room not found with this ID",
         // });
     }
+    return NextResponse.json({
+        success: true,
+        room,
+    })
+}
+
+// update room details => /api/rooms/:id
+export const updateRoom = async (req: NextRequest, { params }: { params: { id: string } }) => {
+    let room = await Room.findById(params.id);
+    const body =await req.json();
+
+
+    if (!room) {
+        return NextResponse.json({
+            success: false,
+            message: "Room not found with this ID",
+        }, { status: 404 });
+
+        // .status(404).json({
+        //     success: false,
+        //     message: "Room not found with this ID",
+        // });
+    }
+
+    room = await Room.findByIdAndUpdate(params.id, body,{
+        new: true
+    });
+
     return NextResponse.json({
         success: true,
         room,
