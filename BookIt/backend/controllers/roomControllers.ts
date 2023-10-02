@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import Room from "../models/room";
+import ErrorHandler from "../utils/errorHandler";
+import { catchAsyncErrors } from "../middlewares/catchAsyncErrors";
 
 // get all rooms  => /api/rooms
-export const allRooms = async (req: NextRequest) => {
+export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
     const resPerPage: number = 8;
 
     const rooms = await Room.find();
@@ -12,60 +14,43 @@ export const allRooms = async (req: NextRequest) => {
         resPerPage,
         rooms,
     });
-}
+})
 
 // create new  room  => /api/rooms
-export const newRoom = async (req: NextRequest) => {
+export const newRoom = catchAsyncErrors(async (req: NextRequest) => {
     const body = await req.json();
 
     const room = await Room.create(body);
-
     return NextResponse.json({
         success: true,
         room,
     });
-}
+})
 
 // get room details => /api/admin/rooms/:id
-export const getRoomDetails = async (req: NextRequest, { params }: { params: { id: string } }) => {
+export const getRoomDetails = catchAsyncErrors(async (req: NextRequest, { params }: { params: { id: string } }) => {
+
     const room = await Room.findById(params.id);
-
     if (!room) {
-        return NextResponse.json({
-            success: false,
-            message: "Room not found with this ID",
-        }, { status: 404 });
-
-        // .status(404).json({
-        //     success: false,
-        //     message: "Room not found with this ID",
-        // });
+        throw new ErrorHandler("Room not found with this ID", 404);
     }
     return NextResponse.json({
         success: true,
         room,
-    })
-}
+    });
+})
 
 // update room details => /api/admin/rooms/:id
-export const updateRoom = async (req: NextRequest, { params }: { params: { id: string } }) => {
+export const updateRoom = catchAsyncErrors(async (req: NextRequest, { params }: { params: { id: string } }) => {
     let room = await Room.findById(params.id);
-    const body =await req.json();
+    const body = await req.json();
 
 
     if (!room) {
-        return NextResponse.json({
-            success: false,
-            message: "Room not found with this ID",
-        }, { status: 404 });
-
-        // .status(404).json({
-        //     success: false,
-        //     message: "Room not found with this ID",
-        // });
+        throw new ErrorHandler("Room not found with this ID", 404);
     }
 
-    room = await Room.findByIdAndUpdate(params.id, body,{
+    room = await Room.findByIdAndUpdate(params.id, body, {
         new: true
     });
 
@@ -73,24 +58,16 @@ export const updateRoom = async (req: NextRequest, { params }: { params: { id: s
         success: true,
         room,
     })
-}
+})
 
 
 // delete room => /api/admin/rooms/:id
-export const deleteRoom = async (req: NextRequest, { params }: { params: { id: string } }) => {
+export const deleteRoom = catchAsyncErrors(async (req: NextRequest, { params }: { params: { id: string } }) => {
     const room = await Room.findById(params.id);
 
 
     if (!room) {
-        return NextResponse.json({
-            success: false,
-            message: "Room not found with this ID",
-        }, { status: 404 });
-
-        // .status(404).json({
-        //     success: false,
-        //     message: "Room not found with this ID",
-        // });
+        throw new ErrorHandler("Room not found with this ID", 404);
     }
 
     // TODO: Delete all images associated related to the room
@@ -101,4 +78,4 @@ export const deleteRoom = async (req: NextRequest, { params }: { params: { id: s
     return NextResponse.json({
         success: true,
     })
-}
+})
