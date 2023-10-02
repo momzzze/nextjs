@@ -1,0 +1,29 @@
+{
+  "name": "BookIt",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "seeder": "tsc seeder/seeder.ts --outDir .temp && node .temp/seeder/seeder.js && rimraf .temp"
+  },
+  "dependencies": {
+    "mongoose": "^7.5.3",
+    "next": "latest",
+    "next-connect": "^1.0.0",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "rimraf": "^5.0.5",
+    "tailwindcss": "latest",
+    "typescript": "latest"
+  }
+}
