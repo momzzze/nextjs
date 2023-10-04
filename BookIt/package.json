@@ -15,8 +15,10 @@
     "next": "latest",
     "next-connect": "^1.0.0",
     "react": "latest",
+    "react-bootstrap": "^2.9.0",
     "react-dom": "latest",
     "react-hot-toast": "^2.4.1",
+    "react-js-pagination": "^3.0.3",
     "react-star-ratings": "^2.3.0"
   },
   "devDependencies": {

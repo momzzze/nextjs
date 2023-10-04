@@ -1,6 +1,20 @@
+import { IRoom } from "@/backend/models/room";
 import RoomItem from "./room/RoomItem";
-const Home = () => {
- 
+import CustomPagination from "./layout/CustomPagination";
+
+interface Props {
+  data: {
+    success: boolean;
+    restPerPage: number;
+    filteredRoomsCount: number;
+    rooms: IRoom[];
+  };
+}
+
+const Home = ({ data }: Props) => {
+    
+  const { rooms, resPerPage, filteredRoomsCount } = data;
+
   return (
     <div>
       <section id="rooms" className="container mt-5">
@@ -9,9 +23,16 @@ const Home = () => {
           <i className="fa fa-arrow-left"></i> Back to Search
         </a>
         <div className="row mt-4">
-          <RoomItem />
+          {rooms.length === 0 ? (
+            <div className="alert alert-danger w-100 text-center">
+              <b>No Rooms Found</b>
+            </div>
+          ) : (
+            rooms?.map((room) => <RoomItem key={room._id} room={room} />)
+          )}
         </div>
       </section>
+      <CustomPagination resPerPage={resPerPage} filteredRoomsCount={filteredRoomsCount} />
     </div>
   );
 };
