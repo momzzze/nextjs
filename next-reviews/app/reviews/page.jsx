@@ -7,7 +7,7 @@ const ReviewsPage = () => {
             <Heading>Reviews Page</Heading>
             <p>Here I will list all the Reviews</p>
             <ul className='flex flex-col gap-3 '>
-                <li className='bg-white border shadow w-80 rounded-t-lg hover:shadow-xl'>
+                <li className='bg-white border shadow w-80 rounded-t-lg hover:scale-110 transform  '>
                     <Link href='/reviews/hollow-knight'>
                         <img
                             src="/images/hollow-knight.jpg"
@@ -16,12 +16,12 @@ const ReviewsPage = () => {
                             height={180}
                             className='rounded-t-lg'
                         />
-                        <h2 className='py-1 text-center'>
+                        <h2 className='py-1 text-center font-orbitron font-bold text-2xl'>
                             Hollow Knight
                         </h2>
                     </Link>
                 </li>
-                <li className='bg-white border shadow w-80 rounded-t-lg hover:shadow-xl'>
+                <li className='bg-white border shadow w-80 rounded-t-lg hover:scale-110 transform transition-transform duration-300'>
                     <Link href='/reviews/stardew-valley'>
                         <img
                             src="/images/stardew-valley.jpg"
@@ -30,7 +30,7 @@ const ReviewsPage = () => {
                             height={180}
                             className='rounded-t-lg'
                         />
-                        <h2 className='py-1 text-center'>
+                        <h2 className='py-1 text-center font-orbitron font-bold text-2xl'>
                             Stardew Valley
                         </h2>
                     </Link>

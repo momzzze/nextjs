@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import './globals.css';
 import NavBar from '../components/NavBar';
+import { exo_2, orbitron } from './fonts';
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en">
+        <html lang="en" className={`${exo_2.variable} ${orbitron.variable}`}>
             <body className='bg-amber-100 flex flex-col px-4 py-1 min-h-screen'>
                 <header style={{ border: 'solid blue 1px' }}>
                     <NavBar />
