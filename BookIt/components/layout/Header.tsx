@@ -2,10 +2,23 @@
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useEffect } from "react";
+import { setIsAuthenticated, setUser } from "@/redux/features/userSlice";
 
 function Header() {
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
+
   const { data } = useSession();
 
+  useEffect(() => {
+    if (data) {
+      dispatch(setUser(data?.user));
+      dispatch(setIsAuthenticated(true));
+    }
+  }, [data]);
+  
   const logoutHandler = () => {
     signOut();
   };
@@ -27,7 +40,7 @@ function Header() {
           </div>
 
           <div className="col-6 col-lg-3 mt-3 mt-md-0 text-end">
-            {data?.user ? (
+            {user ? (
               <div className="ml-4 dropdown d-line">
                 <button
                   className="btn dropdown-toggle"
@@ -39,8 +52,8 @@ function Header() {
                   <figure className="avatar avatar-nav">
                     <img
                       src={
-                        data?.user?.avatar
-                          ? data?.user?.avatar?.url
+                       user?.avatar
+                          ? user?.avatar?.url
                           : "/images/default_avatar.jpg"
                       }
                       alt="John Doe"
@@ -50,7 +63,7 @@ function Header() {
                     />
                   </figure>
                   <span className="placeholder-glow ps-1">
-                    {data?.user?.name}
+                    {user?.name}
                   </span>
                 </button>
 
@@ -78,19 +91,19 @@ function Header() {
               </div>
             ) : (
               <>
-              {data === undefined && (
-                <div className="placeholder-glow">
-                  <figure className="avatar avatar-nv placeholder bg-secondary"></figure>
-                  <span className="placeholder w-25 bg-secondary ms-2"></span>
-                </div>
-              )}
+                {data === undefined && (
+                  <div className="placeholder-glow">
+                    <figure className="avatar avatar-nv placeholder bg-secondary"></figure>
+                    <span className="placeholder w-25 bg-secondary ms-2"></span>
+                  </div>
+                )}
                 {data === null && (
-                <Link
-                  href="/login"
-                  className="btn btn-danger px-4 text-white login-btn float-right"
-                >
-                  Login
-                </Link>
+                  <Link
+                    href="/login"
+                    className="btn btn-danger px-4 text-white login-btn float-right"
+                  >
+                    Login
+                  </Link>
                 )}
               </>
             )}
