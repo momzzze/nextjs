@@ -4,10 +4,10 @@ import './globals.css';
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body>
+            <body className='flex flex-col px-4 py-1 min-h-screen'>
                 <header style={{ border: 'solid blue 1px' }}>
                     <nav>
-                        <ul>
+                        <ul className='flex pl-3 gap-2'>
                             <li>
                                 <Link href="/">Home</Link>
                             </li>
@@ -20,8 +20,10 @@ export default function RootLayout({ children }) {
                         </ul>
                     </nav>
                 </header>
-                {children}
-                <footer style={{ border: 'solid green 1px' }}>
+                <main className='grow py-3'>
+                    {children}
+                </main>
+                <footer className='border-t py-3  text-center text-lg'>
                     Game data and images is from <a href="https://www.rawg.io/">RAWG</a>
                 </footer>
             </body>
