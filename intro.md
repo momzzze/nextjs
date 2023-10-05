@@ -73,11 +73,27 @@ so when we use **use client** we change our server client component from default
 - so we use it to make client-side component routing because if we use a tag will be multi page app and we will render the things each time when we click on the link
   so we use link component to make it single page app and to render only the things that we need to render.
 
-- so if we use build and production run after this we load the files and after that *Links* are instant without any load thats call **prefetching** if we want to disable it we have to add ot the link **prefetch={false}**
+- so if we use build and production run after this we load the files and after that _Links_ are instant without any load thats call **prefetching** if we want to disable it we have to add ot the link **prefetch={false}**
 
 by default in prod next pre fetch all the links to make the navigation faster.
 
 ## css files:
 
-  - you can add one **global.css** and set it in **layer.js** but the power of folder structure is that for each route element you can add css file and separate the look and you can specific different styles for navs for example on 2 places.
-  - 
+- you can add one **global.css** and set it in **layer.js** but the power of folder structure is that for each route element you can add css file and separate the look and you can specific different styles for navs for example on 2 places.
+
+## add alias
+
+- we need to ignore nesting like ../../ and so on when we import alias in js config file
+
+```{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
+```
+
+## static assets:
+
+  - static assets can be added by creating folder in mine directory with name public and there you can reach every single file or folder inside directly from your browser for example **localhost:3000/images/1.jpg** or so on
