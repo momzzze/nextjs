@@ -1,9 +1,10 @@
 import React from 'react'
+import Heading from '../../../components/Heading'
 
 const HollowKnightPage = () => {
     return (
         <div>
-            <h1>Hollow Knight</h1>
+            <Heading>Hollow Knight</Heading>
             <p>Here I will list all the Reviews</p>
         </div>
     )

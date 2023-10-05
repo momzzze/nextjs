@@ -1,10 +1,11 @@
 import React from 'react'
+import Heading from '../components/Heading';
 
 const HomePage = () => {
     console.log('HomePage=> rendering');
     return (
         <div>
-            <h1>Indie Gamer</h1>
+            <Heading>Indie Gamer</Heading>
             <p>Only the best indie games, reviewed for you.</p>
         </div>
     )
