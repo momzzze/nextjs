@@ -1,28 +1,31 @@
 import React from 'react'
 import Heading from '@/components/Heading';
 import Link from 'next/link';
+import { getFeaturedReviews, getReviews } from '@/lib/reviews';
 
-const HomePage = () => {
-    console.log('HomePage=> rendering');
+
+const HomePage = async () => {
+    // const reviews = await getReviews();
+    const review = await getFeaturedReviews();
     return (
         <div className='flex flex-col items-center'>
             <Heading>Indie Gamer</Heading>
             <p className='pb-3'>Only the best indie games, reviewed for you.</p>
-            <div className='bg-white border shadow w-80 hover:shadow-xl md:hover:shadow-none rounded-t-lg lg:hover:scale-110 lg:transform lg:transition-transform duration-300 sm:w-full'>
-                <Link href='/reviews/stardew-valley'className='flex flex-col sm:flex-row'>
+            <div className='bg-white border shadow w-80 hover:shadow-xl  rounded-t-lg  sm:w-full mb-5'>
+                <Link href={`/reviews/${review.slug}`} className='flex flex-col sm:flex-row'>
                     <img
-                        src="/images/stardew-valley.jpg"
-                        alt="stardew-valley"
+                        src={review.image}
+                        alt={review.title}
                         width={320}
                         height={180}
                         className='rounded-t-lg sm:rounded-l sm:rounded-r-none'
                     />
                     <h2 className='py-1 text-center font-orbitron font-bold text-2xl sm:px-2'>
-                        Stardew Valley
+                        {review.title}
                     </h2>
                 </Link>
             </div>
-           
+
         </div>
     )
 }

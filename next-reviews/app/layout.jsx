@@ -3,6 +3,14 @@ import './globals.css';
 import NavBar from '../components/NavBar';
 import { exo_2, orbitron } from './fonts';
 
+export const metadata = {
+    title: {
+        default: 'Indie Gamer',
+        template: '%s | Indie Gamer',
+    },
+    description: 'Only the best indie games, reviewed for you.',
+    
+}
 export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${exo_2.variable} ${orbitron.variable}`}>
@@ -13,7 +21,7 @@ export default function RootLayout({ children }) {
                 <main className='grow py-3'>
                     {children}
                 </main>
-                <footer className='border-t py-3  text-center text-lg'>
+                <footer className='border-t py-3 text-slate-500  text-center text-lg'>
                     Game data and images is from <a className='text-orange-800 hover:underline' href="https://www.rawg.io/">RAWG</a>
                 </footer>
             </body>
