@@ -97,3 +97,11 @@ by default in prod next pre fetch all the links to make the navigation faster.
 ## static assets:
 
   - static assets can be added by creating folder in mine directory with name public and there you can reach every single file or folder inside directly from your browser for example **localhost:3000/images/1.jpg** or so on
+
+
+## hydration:
+   its when we render static server page but inside we use another component with dynamic data
+   for example we use button component with onClick function and we use **use client** 
+
+   we already have generated initial html  by the server we have buttons. after we load this html browser will load
+   the JS code and will execute component functions and will be almost the same as pre rendered by the server but here they can use
