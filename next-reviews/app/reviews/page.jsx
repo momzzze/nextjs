@@ -4,6 +4,7 @@ import Heading from '@/components/Heading'
 import { getReviews } from '@/lib/reviews'
 const ReviewsPage = async () => {
     const reviews = await getReviews();
+    console.log('[ReviewsPage] reviews',reviews);
     return (
         <div>
             <Heading>Reviews Page</Heading>
