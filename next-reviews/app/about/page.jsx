@@ -1,19 +1,16 @@
-import React from 'react'
-import Heading from '@/components/Heading'
-
+import Heading from '@/components/Heading';
 
 export const metadata = {
-    title: 'About',
-    
-}
+  title: 'About',
+};
 
-const AboutPage = () => {
-    return (
-        <div>
-            <Heading>AboutPage</Heading>
-            <p>This will be my about page.</p>
-        </div>
-    )
+export default function AboutPage() {
+  return (
+    <>
+      <Heading>About</Heading>
+      <p>
+        A website created to learn Next.js
+      </p>
+    </>
+  );
 }
-
-export default AboutPage

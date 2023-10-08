@@ -1,20 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx}', 
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}'
+    './app/**/*.{jsx,tsx}',
+    './components/**/*.{jsx,tsx}',
   ],
   theme: {
     extend: {
-      fontFamily:{
-        sans:['var(--font-exo2)','sans-serif'],
-        orbitron:['var(--font-orbitron)','sans-serif'],
+      fontFamily: {
+        sans: ['var(--font-exo2)', 'sans-serif'],
+        orbitron: ['var(--font-orbitron)', 'sans-serif'],
       },
     },
   },
   plugins: [
     require('@tailwindcss/typography'),
   ],
-}
-
+};
