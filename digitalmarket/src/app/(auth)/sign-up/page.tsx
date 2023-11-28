@@ -8,11 +8,13 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AuthCredentialsValidator, TAuthCredentialsValidator } from "@/lib/validators/account-credentials-validator";
+import {
+  AuthCredentialsValidator,
+  TAuthCredentialsValidator,
+} from "@/lib/validators/account-credentials-validator";
+import { trpc } from "@/trpc/client";
 
 const SignUp = () => {
- 
-
   const {
     register,
     handleSubmit,
@@ -21,10 +23,13 @@ const SignUp = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   });
 
-    const onSubmit = ({email,password}:TAuthCredentialsValidator) => {
-        console.log(email,password);
-        //TODO: send data to the server
-    };
+  const { data } = trpc.anyApiRouter.useQuery();
+  
+
+  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
+    console.log(email, password);
+    //TODO: send data to the server
+  };
 
   return (
     <>
@@ -52,7 +57,7 @@ const SignUp = () => {
                 <div className="grid gap-1 py-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
-                  {...register('email')}
+                    {...register("email")}
                     name="email"
                     placeholder="your@example.com"
                     type="email"
@@ -64,7 +69,7 @@ const SignUp = () => {
                 <div className="grid gap-1 py-2">
                   <Label htmlFor="password">Password</Label>
                   <Input
-                  {...register('password')}
+                    {...register("password")}
                     name="password"
                     placeholder="Password"
                     type="password"
