@@ -30,8 +30,7 @@ const NavBar = () => {
                   {user ? null : <Link href={"/sign-in"}className={buttonVariants({variant:'ghost'})}>Sign in</Link>}
                   {user?null: <span className="h-6 w-px bg-gray-200" aria-hidden='true'/>}
                   {user ? null : <Link href={"/sign-up"}className={buttonVariants({variant:'ghost'})}>Create account</Link>}
-                  {user?null: <span className="h-6 w-px bg-gray-200" aria-hidden='true'/>}
-                  {user ? null : <Link href={"/sign-up"}className={buttonVariants({variant:'ghost'})}>Cart</Link>}                  
+                  {user?null: <span className="h-6 w-px bg-gray-200" aria-hidden='true'/>}                                    
                   {user?<p></p>:<Link href={'/'}>Sign Out</Link>}
                   {user?null:<div className="flex lg:ml-6"><span className="h-6 w-px bg-gray-200" aria-hidden='true'/></div>}
                   <div className="ml-4 flow-root lg:ml-6">
