@@ -7,6 +7,7 @@ import { ModeToggle } from "./mode-toggle";
 const Header = () => {
   return (
     <header className="flex items-center justify-between">
+      <link rel="icon" href="/drop.ico" />
       <Link href="/" className="flex items-center space-x-5 ">
         <div className="bg-[#0160FE] w-fit">
           <Image
