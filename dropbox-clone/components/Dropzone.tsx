@@ -17,11 +17,10 @@ function Dropzone() {
   const [loading, setLoading] = useState(false);
   const { isLoaded, isSignedIn, user } = useUser();
 
-  // max file 20MB
+  // max file 20MB                  
   const maxSize = 20971520;
 
   const onDrop = (accepted: File[]) => {
-    console.log(accepted);
     accepted.forEach((file) => {
       const reader = new FileReader();
 
@@ -53,7 +52,7 @@ function Dropzone() {
     });
 
     const imageRef = ref(storage, `users/${user.id}/files/${docRef.id}`);
-    
+
     await uploadBytes(imageRef, selectedFile).then(async (snapshot) => {
       const downloadUrl = await getDownloadURL(imageRef);
 
@@ -74,13 +73,14 @@ function Dropzone() {
         isDragReject,
         fileRejections,
       }) => {
-        const isFileTooLarge =
-          fileRejections.length > 0 && fileRejections[0].file.size > maxSize;
-
+        const isFileTooLarge =fileRejections.length > 0 && fileRejections[0].file.size > maxSize;
+        
+        
+        
         return (
           <section className="m-4">
             <div
-              {...getRootProps()}
+              {...getRootProps()}              
               className={cn(
                 "w-full h-52 flex justify-center items-center p-5 border border-dashed rounded-lg text-center",
                 isDragActive
