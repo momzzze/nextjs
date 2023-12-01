@@ -15,6 +15,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { FileType } from "@/typings";
+import { Button } from "../ui/button";
+import { PencilIcon, TrashIcon } from "lucide-react";
+import { useAppStore } from "@/store/store";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -30,6 +34,24 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+
+  const [setIsDeleteModalOpen, setFilename, setFileId, setIsRenameModalOpen] =
+    useAppStore((state) => [
+      state.setIsDeleteModalOpen,
+      state.setFilename,
+      state.setFileId,
+      state.setIsRenameModalOpen,
+    ]);
+
+  const openDeleteModal = (fileId: string) => {
+    setFileId(fileId);
+    setIsDeleteModalOpen(true);
+  };
+  const openRenameModal = (fileId: string, filename: string) => {
+    setFileId(fileId);
+    setFilename(filename);
+    setIsRenameModalOpen(true);
+  };
 
   return (
     <div className="rounded-md border">
@@ -61,15 +83,50 @@ export function DataTable<TData, TValue>({
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    {cell.column.id === "timestamp" ? (
+                      <div className="flex flex-col">
+                        <div className="text-sm">
+                          {(cell.renderValue() as Date).toLocaleDateString()}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {(cell.renderValue() as Date).toLocaleTimeString()}
+                        </div>
+                      </div>
+                    ) : cell.column.id === "filename" ? (
+                      <p
+                        onClick={() => {
+                          openRenameModal(
+                            (row.original as FileType).id,
+                            (row.original as FileType).filename
+                          );
+                        }}
+                        className="underline flex items-center  hover:text-blue-500 hover:cursor-pointer"
+                      >
+                        {cell.getValue() as string}{" "}
+                        <PencilIcon className="ml-2" size={15} />
+                      </p>
+                    ) : (
+                      flexRender(cell.column.columnDef.cell, cell.getContext())
+                    )}
                   </TableCell>
                 ))}
+
+                <TableCell key={(row.original as FileType).id} className="w-10">
+                  <Button
+                    variant={"outline"}
+                    onClick={() => {
+                      openDeleteModal((row.original as FileType).id);
+                    }}
+                  >
+                    <TrashIcon fill="red" color="red" size={20} />
+                  </Button>
+                </TableCell>
               </TableRow>
             ))
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+                You have no Files.
               </TableCell>
             </TableRow>
           )}
