@@ -1,7 +1,4 @@
-import { Button, buttonVariants } from '@/components/ui/button'
-import { UserButton } from '@clerk/nextjs'
 import { ArrowRightIcon } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Home() {
@@ -15,7 +12,7 @@ export default function Home() {
               Storing everything for you and your business needs. All in one place
             </h1>
 
-            <p className='pb-20'>Enhance your personal storage with Dropbox clone, offering a simple and efficient way to upload, organize, and access files from anywhere. Securely store important documents and media, and experience the convenience of easy file managment and sharing in one centralized solution.
+            <p className='pb-20'>Enhance your personal storage with Dropbox clone, offering a simple and efficient way to upload, organize, and access files from anywhere. Securely store important documents and media, and experience the convenience of easy file management and sharing in one centralized solution.
             </p>
 
             <Link className='flex p-5 bg-blue-400 cursor-pointer w-fit' href='/dashboard'>
@@ -34,7 +31,7 @@ export default function Home() {
         </div>
 
         <p className='text-center font-bold text-xl pt-5'>Disclaimer</p>
-        <p className='text-center font-light p-2'>This Project is made for informational and educational purposes only. We do not own or affiliate with Dropbox or/and any of its subsidiaries in any form. Copyright Disclaimer under section 107 of the Copyright Act 1976, allowane is made for "fair use" of this video for education purposes.</p>
+        <p className='text-center font-light p-2'>This Project is made for informational and educational purposes only. We do not own or affiliate with Dropbox or/and any of its subsidiaries in any form. Copyright Disclaimer under section 107 of the Copyright Act 1976, allowance is made for fair use of this video for education purposes.</p>
     </main>
   )
 }
