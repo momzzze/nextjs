@@ -22,15 +22,20 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+This project is a replica of Dropbox. It uses Next.js, TypeScript, Tailwind CSS, and Firebase.
+For authentication, it uses Clerk because its easy to use and its secure and fast.
+We have 2 pages, front page and dashboard page.
+Front page is the page where everyone can see whats the content of the site it also has Try for free button which will redirect you to the dashboard page.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Dashboard is the place were you can see your files. You can upload files via drag&drop input field,delete files or rename files.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+For styling we use Tailwind CSS via Shadcn.
+For global state management we use Zustand.
+For authentication we use Clerk.
+For file storage we use Firebase Storage.
+For database we use Firebase Firestore.
+For deployment we use Vercel.
+
 
 ## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    This project is deployed on Vercel with domain name [https://dropboxreplica.online/](https://dropboxreplica.online/)
