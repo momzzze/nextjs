@@ -10,4 +10,4 @@ npm run dev
 ## Deployments:
 
  current deployment is not setted up but I use ngrok to deploy it to the web for testing purposes. If its online it will be on this url:
- [link]:(https://champion-generally-foal.ngrok-free.app)
+ [link](https://champion-generally-foal.ngrok-free.app)
