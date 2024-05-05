@@ -1,7 +1,52 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const Page = () => {
+  const [error, setError] = useState("");
+  const router = useRouter();
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    const email = e.target[0].value;
+    const password = e.target[1].value;
+
+    if (!isValidEmail(email)) {
+      setError("Invalid email");
+      return;
+    }
+    if (!password || password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.status === 400) {
+        setError("User already exists");
+      }
+      if (response.status === 200) {
+        router.push("/login");
+      }
+    } catch (error) {
+      setError("Error creating user");
+    }
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="bg-[#212121] p-8 rounded shadow-md w-96">
@@ -9,7 +54,7 @@ const Page = () => {
           Register
         </h1>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <input
               type="text"
@@ -29,7 +74,9 @@ const Page = () => {
               required
             />
           </div>
-
+          <div>
+            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+          </div>
           <div>
             <button
               className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
