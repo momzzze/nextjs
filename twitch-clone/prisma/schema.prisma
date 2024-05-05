@@ -16,6 +16,31 @@ model User {
   externalUserId String @unique
   bio String? @db.Text
 
+  following Follow[] @relation(name: "Following")
+  followedBy Follow[] @relation(name: "FollowedBy")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+
+model Follow{
+  id String @id @default(uuid())
+  followerId String
+  followingId String
+
+
+  // explantation
+  // 1. followerId is the field name in the Follow table
+  // 2. id is the field name in the User table
+  // 3. onDelete: Cascade means that if a user is deleted, all the follow relations will be deleted as well
+  follower User @relation(name: "Following",fields: [followerId], references: [id], onDelete: Cascade)
+  following User @relation(name: "FollowedBy",fields: [followingId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
 }
